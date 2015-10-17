@@ -14,8 +14,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('chat message', function(msg){
-    socket.broadcast.emit('chat message', msg);
-    console.log('message: ' + msg);
+    socket.broadcast.emit('chat message', msg.from + ': '+ msg.content);
+    console.log(msg.from + ': '+ msg.content);
+  });
+
+  socket.on('i am', function(msg){
+    socket.broadcast.emit('chat message', msg + ' has joined');
+    console.log(msg + ' has joined');
   });
 
 });
