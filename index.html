@@ -33,10 +33,12 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
-      $('#chat').hide();
-      var chatInput = $('#chat input')
-      var nick;
+      //$('#chat').hide();
+      $('#login').hide();
+      //var chatInput = $('#chat input')
+      //var nick;
 
+      /*
       $('login form').submit(function(){
         nick = $('#login input').val();
         $('#chat').show();
@@ -44,6 +46,7 @@
         socket.emit('i am', $('#nick').val());
         return false;
       });
+      */
 
       $('chat form').submit(function(){
         socket.emit('chat message', {from: 'none', content: $('#m').val() });
