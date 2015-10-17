@@ -15,16 +15,16 @@
   </head>
   <body>
 
-    <div id="login">
-      <form action="">
+    <div class="login">
+      <form id="login" action="">
         <label>Nickname: </label>
-        <input autocomplete="off" /><button>Talk!</button>
+        <input id='nick' autocomplete="off" /><button>Talk!</button>
       </form>
     </div>
 
-    <div id="chat">
+    <div class="messagebox">
       <ul id="messages"></ul>
-      <form action="">
+      <form id="messageinput" action="">
         <input id="m" autocomplete="off" /><button>Send</button>
       </form>
     </div>
@@ -33,24 +33,22 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
-      //$('#chat').hide();
-      $('#login').hide();
-      //var chatInput = $('#chat input')
-      //var nick;
+      $('.messagebox').hide();
+      //$('#login').hide();
+      var chatInput = $('#messageinput')
+      var nick;
 
-      /*
-      $('login form').submit(function(){
-        nick = $('#login input').val();
-        $('#chat').show();
-        $('#login').hide();
+      $('#login').submit(function(){
+        nick = $('#nick').val();
+        $('.messagebox').show();
+        $('.login').hide();
         socket.emit('i am', $('#nick').val());
         return false;
       });
-      */
 
-      $('chat form').submit(function(){
-        socket.emit('chat message', {from: 'none', content: $('#m').val() });
-        $('#messages').append($('<li>').text('none: ' + $('#m').val()));
+      $('#messageinput').submit(function(){
+        socket.emit('chat message', {from: nick, content: $('#m').val() });
+        $('#messages').append($('<li>').text(nick + ": " + $('#m').val()));
         $('#m').val('');
         return false;
       });
